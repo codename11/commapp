@@ -102,3 +102,12 @@ body {
 	margin-left: 5px;
 	margin-top: 5px;
 }
+
+.item5{
+	border: 0px solid #2fbee9;
+	border-top: 2px solid #2fbee9;
+	background-color: whitesmoke !important;
+	height: auto;
+	grid-column: 1 / 4;
+	grid-row: 9;
+}

@@ -3,7 +3,7 @@
 
 <head>
 	<title>Realtime communication with WebRTC</title>
-	<link rel="stylesheet" href="/css/main.css" />
+	<link rel="stylesheet" href="css/main.css" />
 	<link rel="shortcut icon" href="favicon.ico">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +32,7 @@
 		</div>
 	
 		<div class="grid-item item1">
-			<video class="vid" style="display: none;" id="localVideo" autoplay muted playsinline></video>
+			<!--<video class="vid" style="display: none;" id="localVideo" autoplay muted playsinline></video>-->
 			
 			<input id="chk" type="checkbox" value="" style="display: none;">
 			
@@ -59,6 +59,9 @@
 		<div class="btn grid-item item4 noPad"><button class="batn" id="erase" value="<" onclick="pass(this)" disabled><i class="fas fa-undo"></i></button></div>
 		
 		<div class="btn grid-item item4 noPad"><button class="batn" id="down" value="false" onclick="pass(this)"><i class="fas fa-phone-slash"></i></button></div>
+		
+		<div class="btn grid-item item5 noPad"><button class="batn" style="color: orange;" onclick="location.reload();"><i class="fas fa-share"></i></button></div>
+		
 	</div>
 	<!-- The Modal -->
 	<div class="modal" id="myModal">

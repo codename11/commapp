@@ -1,10 +1,11 @@
 'use strict';
 //localhost:8080
 
+let terminatus = null;
+
 document.addEventListener("keydown", (e)=>{
 	console.log(e);
 	if(e.key == "#" || e.key =="*" || (isNaN(e.key) == false)){
-
 		document.getElementById("brojka").innerHTML += e.key;
 	}
 	
@@ -53,7 +54,7 @@ room = prompt('Enter room name:');*/
 let socket = io.connect();
 let room = null;
 
-function pass(me){
+function pass(me){//Every button has this function. Depending on it's id and/or value, various things can happen.
 	
 	let elem = document.getElementById("brojka");
 	let len1 = elem.innerHTML.length;
@@ -82,11 +83,11 @@ function pass(me){
 		
 		elem.innerHTML = "";
 
-		isChannelReady = false;
-		isInitiator = false;
 		isStarted = false;
 		pc.close();
 		pc = null;
+		terminatus = true;
+		isInitiator = false;
 	}	
 	
 	if(me.value != "<" && me.value != "true" && me.value != "false" && switch1 == true){
@@ -111,10 +112,10 @@ function pass(me){
 	if(document.getElementById("up").disabled==true){
 		 document.getElementById("erase").disabled = true;
 	}
-	
+
 }
 
-function callIt(numbers){
+function callIt(numbers){//get numbers for room.
 	
 	//room = prompt('Enter room name:');
 	room = numbers;
@@ -199,7 +200,7 @@ function callIt(numbers){
 	function gotStream(stream) {
 	  console.log('Adding local stream.');
 	  localStream = stream;
-	  localVideo.srcObject = stream;
+	  //localVideo.srcObject = stream;//dizejblovanje prikazivanja lokalnog strima.
 	  sendMessage('got user media');
 	  if (isInitiator) {
 		  
@@ -214,7 +215,7 @@ function callIt(numbers){
 
 	let constraints = {
 	  video: true,
-	  audio: true
+	  /*audio: true*/
 	};
 
 	console.log('Getting user media with constraints', constraints);
@@ -345,16 +346,34 @@ function hangup() {
 	console.log('Hanging up.');
 	stop();
 	sendMessage('bye');
+	terminatus = true;
+	
+	disabler();
 }
 
 function handleRemoteHangup() {
 	console.log('Session terminated.');
 	stop();
 	isInitiator = false;
+	terminatus = true;
+	
+	disabler();
 }
 
 function stop() {
 	isStarted = false;
 	pc.close();
 	pc = null;
+	terminatus = true;
+	
+	disabler();
+}
+
+function disabler(){
+	document.getElementById("erase").disabled = true;
+	
+	document.getElementById("up").disabled = false;
+	document.getElementById("up").children[0].style.color = "green";
+	document.getElementById("down").disabled = true;
+	document.getElementById("down").children[0].style.color = "gray";
 }
